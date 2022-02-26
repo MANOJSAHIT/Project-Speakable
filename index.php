@@ -75,7 +75,7 @@
                 <div class="main-content-wrapper big">
                     <div class="main-content">
                         <div class="main-content-header">
-                            <h2>Capture the picture of your sign here</h2>
+                            <h2>Capture the American Sign Language signs here</h2>
                             <span>Get set go!</span>
                         </div>
                         <div class="main-content-data">
@@ -535,6 +535,15 @@
                         <div style='margin-left:1rem;'>
                             <h3>Karusala Deepak Chowdary</h3>
                             <p>Regn. No. 19BCS050</p>
+                        </div>
+                    </div>
+                    <div class='admin' style='border-radius:0.25rem;padding:1rem;display:flex;align-items:center;'>
+                        <div>
+                            <img width='75' height='75' src='assets/Santeswar.jpg'/>
+                        </div>
+                        <div style='margin-left:1rem;'>
+                            <h3>K V J Santeswar</h3>
+                            <p>Regn. No. 19BCS053</p>
                         </div>
                     </div>
                     <div class='admin' style='border-radius:0.25rem;padding:1rem;display:flex;align-items:center;'>

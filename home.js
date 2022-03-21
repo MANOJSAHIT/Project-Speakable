@@ -13,6 +13,7 @@
 $("#recogniseButton").click(function()
 {
     $("#dictionaryAppMain").css("display", "none");
+    $("#dictionary1AppMain").css("display", "none");
     $("#teamAppMain").css("display", "none");
     $("#recogniseAppMain").css("display", "block");
     $(this).addClass('active').siblings().removeClass('active');
@@ -25,7 +26,20 @@ $("#dictionaryButton").click(function()
 {
     $("#recogniseAppMain").css("display", "none");
     $("#teamAppMain").css("display", "none");
+    $("#dictionary1AppMain").css("display", "none");
     $("#dictionaryAppMain").css("display", "block");
+    $(this).addClass('active').siblings().removeClass('active');
+    if(document.querySelector('.app-left').classList.contains('show'))
+    {
+        document.querySelector('.app-left').classList.remove('show');
+    }
+});
+$("#dictionary1Button").click(function()
+{
+    $("#recogniseAppMain").css("display", "none");
+    $("#teamAppMain").css("display", "none");
+    $("#dictionaryAppMain").css("display", "none");
+    $("#dictionary1AppMain").css("display", "block");
     $(this).addClass('active').siblings().removeClass('active');
     if(document.querySelector('.app-left').classList.contains('show'))
     {
@@ -36,6 +50,7 @@ $("#teamButton").click(function()
 {
     $("#recogniseAppMain").css("display", "none");
     $("#dictionaryAppMain").css("display", "none");
+    $("#dictionary1AppMain").css("display", "none");
     $("#teamAppMain").css("display", "block");
     $(this).addClass('active').siblings().removeClass('active');
     if(document.querySelector('.app-left').classList.contains('show'))
@@ -63,11 +78,27 @@ $("#startCameraButton").on("click", function(){
         $(".camera-container").css("display", "none");
         var mainContentData = document.getElementsByClassName("main-content-data")[0];
         mainContentData.appendChild(video);
-        $("#startCameraButton").text("Camera is running...");
+        $("#startCameraButton").text("Stop recognition and reset the Prediction Panel");
+        $("#startCameraButton").addClass('active');
+    }
+    else
+    {
+        globalStream.getTracks().forEach(function(track){
+            if (track.readyState == 'live'){
+                track.stop();
+            }
+        });
+        document.getElementById("liveVideo").parentNode.removeChild(document.getElementById("liveVideo"));
+        $(".camera-container").css("display", "block");
+        $("#startCameraButton").removeClass('active');
+        $("#startCameraButton").text("Start Camera and Recognise the Sign Language");
+        $("#predictionPanelCharacter").text("-");
+        $("#predictionPanelWord").text("-");
+        $("#predictionPanelSentence").text("-");
     }
 });
 $("#moveSentenceButton").on("click", function(){
-    var sentenceToMove = $("#controlPanelSentence").text();
+    var sentenceToMove = $("#predictionPanelSentence").text();
     if(sentenceToMove!="-")
     {
         globalStream.getTracks().forEach(function(track){
@@ -76,11 +107,12 @@ $("#moveSentenceButton").on("click", function(){
             }
         });
         document.getElementById("liveVideo").parentNode.removeChild(document.getElementById("liveVideo"));
-        $("#startCameraButton").text("Start Camera and Recognise ASL");
         $(".camera-container").css("display", "block");
-        $("#controlPanelCharacter").text("-");
-        $("#controlPanelWord").text("-");
-        $("#controlPanelSentence").text("-");
+        $("#startCameraButton").text("Start Camera and Recognise the Sign Language");
+        $("#startCameraButton").removeClass('active');
+        $("#predictionPanelCharacter").text("-");
+        $("#predictionPanelWord").text("-");
+        $("#predictionPanelSentence").text("-");
         $("#speakText").val(sentenceToMove);
     }
 });
@@ -89,6 +121,23 @@ if (!window.speechSynthesis)
     $("#warning").css("display", "block");
     $("#speak").css("display", "none");
 }
+$("#languageOptions").change(function(){
+    var language = $("#languageOptions :selected").val();
+    if(language=='en')
+    {
+        $("#voiceOptions").html("<option data-lang='en-IN' data-name='Microsoft Heera - English (India)'>Microsoft Heera - English (India)</option><option data-lang='en-IN' data-name='Microsoft Ravi - English (India)'>Microsoft Ravi - English (India)</option>");
+    }
+    else
+    {
+        $("#voiceOptions").html("<option data-lang='hi-IN' data-name='Google (hi-IN)'>Google हिन्दी</option>");
+    }
+});
+/*function OnLoad()
+{
+    var control = new google.elements.transliteration.TransliterationControl({sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH, destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI], shortcutKey: 'ctrl+g', transliterationEnabled: true});
+    control.makeTransliteratable(["speakText"]);
+}
+google.setOnLoadCallback(OnLoad);*/
 $("#speak").on("submit",function(event){
     event.preventDefault();
     var voiceSelect = document.getElementById("voiceOptions");

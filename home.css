@@ -572,7 +572,16 @@ button
 {
   background-color:#253b9e;
 }
-#controlPanelTable
+#startCameraButton.active
+{
+  background-color: #c50a0a;
+  border: 2px solid #7e0000;
+}
+#startCameraButton:hover.active
+{
+  background-color:#e70a0a;
+}
+#predictionPanelTable
 {
   border:none;
   color:#eee;
@@ -615,6 +624,27 @@ button
   border: none;
   outline: none;
 }
+#languageOptions
+{
+  background-color:#2c3c78;
+  border: 2px solid #1b415e;
+  outline:none;
+  padding:3px;
+  width:100%;
+  text-align:center;
+  border-radius:6px;
+  margin:10px 0;
+  color:white;
+}
+#languageOptions:hover
+{
+  background-color:#253b9e;
+}
+#languageOptions option
+{
+  background-color: white;
+  color:black;
+}
 #voiceOptions
 {
   background-color:#2c3c78;
@@ -625,7 +655,6 @@ button
   text-align:center;
   border-radius:6px;
   margin:10px 0;
-  margin-bottom:20px;
   color:white;
 }
 #voiceOptions:hover
@@ -645,6 +674,7 @@ button
   color:white;
   padding:3px;
   cursor:pointer;
+  margin-top:10px;
 }
 #speakButton:hover
 {
@@ -837,7 +867,7 @@ button
 {
   stroke: #845656;
 }
-#emptyGrid2
+.emptyGrid2
 {
   display: none;
 }
@@ -939,15 +969,15 @@ button
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap:15px;
   }
-  #emptyGrid1
+  .emptyGrid1
   {
     display: none;
   }
-  #emptyGrid2
+  .emptyGrid2
   {
     display: block;
   }
-  #emptyGrid3
+  .emptyGrid3
   {
     display:none;
   }
@@ -968,7 +998,7 @@ button
     grid-template-columns: 1fr 1fr;
     grid-gap:10px;
   }
-  #emptyGrid2
+  .emptyGrid2
   {
     display: none;
   }

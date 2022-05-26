@@ -89,7 +89,6 @@
                             <span>Get set go!</span>
                         </div>
                         <div class="main-content-data">
-                            <iframe style='display:none;width:100%; height:100%;' id='liveVideo' src="static/liveVideo.html"></iframe>
                             <div class="camera-container">
                                 <div class="camera-top">
                                     <div class="zoom"></div>
@@ -109,6 +108,8 @@
                                 </div>
                                 <div class="camera-bottom"></div>
                             </div>
+                            <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+                            <img src="" id="adaptiveCanvas" width="640" height="480" style="display:none;"/>
                         </div>
                         <div id="toggle-sign-language">
                             <input type="checkbox" class="checkbox" onclick='changeLanguage()'/>

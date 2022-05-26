@@ -233,7 +233,7 @@ def predictASL(res):
             blank_flag = 0
             word += current_symbol
 
-def predictISL(res):
+def predictISL(rs): #Under Construction...to be integrated by another team
     global ISL_loaded_model
     global word
     global sentence
@@ -241,47 +241,28 @@ def predictISL(res):
     global blank_flag
     global current_symbol
     
+    res = rs.astype(np.uint8)
     res = cv2.resize(res, (261,310))
     result = ISL_loaded_model.predict(res.reshape(1, 261, 310, 1))
     prediction={}
-    prediction['blank'] = result[0][0]
-    inde = 1
+    prediction['0'] = result[0][0]
+    prediction['1'] = result[0][1]
+    prediction['2'] = result[0][2]
+    prediction['3'] = result[0][3]
+    prediction['4'] = result[0][4]
+    prediction['5'] = result[0][5]
+    prediction['6'] = result[0][6]
+    prediction['7'] = result[0][7]
+    prediction['8'] = result[0][8]
+    prediction['9'] = result[0][9]
+    inde = 10
     for i in ascii_uppercase:
         prediction[i] = result[0][inde]
         inde += 1
     prediction = sorted(prediction.items(), key=operator.itemgetter(1), reverse=True)
     current_symbol = prediction[0][0]
-    if(current_symbol == 'blank'):
-        for i in ascii_uppercase:
-            ct[i] = 0
-    ct[current_symbol] += 1
-    if(ct[current_symbol] > 60):
-        for i in ascii_uppercase:
-            if i == current_symbol:
-                continue
-            tmp = ct[current_symbol] - ct[i]
-            if tmp < 0:
-                tmp *= -1
-            if tmp <= 20:
-                ct['blank'] = 0
-                for i in ascii_uppercase:
-                    ct[i] = 0
-                return
-        ct['blank'] = 0
-        for i in ascii_uppercase:
-            ct[i] = 0
-        if current_symbol == 'blank':
-            if blank_flag == 0:
-                blank_flag = 1
-                if len(sentence) > 0:
-                    sentence += " "
-                sentence += word
-                word = ""
-        else:
-            if(len(sentence) > 16):
-                sentence = ""
-            blank_flag = 0
-            word += current_symbol
+    word = "Cannot generate words in ISL"
+    sentence = "Cannot generate sentence in ISL"
 
 ct = {}
 ct['blank'] = 0

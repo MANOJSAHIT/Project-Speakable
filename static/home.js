@@ -182,8 +182,8 @@ $("#languageOptions").change(function(){
             "method": "POST",
             "headers": {
                 "content-type": "application/x-www-form-urlencoded",
-                "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
-                "X-RapidAPI-Key": "256de473femsh9695bb1de09d790p1700aejsn90930725d0ea"
+                "X-RapidAPI-Host": "<RAPID-API-HOST>",
+                "X-RapidAPI-Key": "<RAPID-API-KEY>"
             },
             "data": {
                 "q": $("#speakText").val(),
